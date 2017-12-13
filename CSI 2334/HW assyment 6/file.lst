@@ -1,0 +1,137 @@
+Microsoft (R) Macro Assembler Version 6.11		    02/24/09 10:50:38
+file.asm						     Page 1 - 1
+
+
+				; Filename:	4.3a
+				; Author:	Glen Newell
+				; Course:	CSI 2334
+				; Assignment:	6a
+				; Helpers:	None
+				;
+				; This program will help solve the equation p(x)=5x^3-7x^2+3x-10
+				;
+
+				.386
+				.MODEL FLAT
+
+				ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+
+				INCLUDE io.h					; Include header file
+			      C ; IO.H -- header file for I/O macros
+			      C ; 32-bit version for flat memory model
+			      C ; R. Detmer   last revised 8/2000
+			      C .NOLIST     ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+ = 0000000D			cr	EQU	0dh				; carriage return
+ = 0000000A			lf	EQU	0ah				; line feed
+
+				.STACK 4096
+
+ 00000000			.DATA
+ 00000000 45 6E 74 65 72	prompt1	BYTE	"Enter a number: ",0		; prompts for 1st number
+	   20 61 20 6E 75
+	   6D 62 65 72 3A
+	   20 00
+ 00000011  00000010 [		value	BYTE	16 DUP(?)			; Allocate Temp storage
+	    00
+	   ]
+ 00000021 0D 0A 54 68 65	answer	BYTE	cr,lf,"The answer is: " 	; promopt for output
+	   20 61 6E 73 77
+	   65 72 20 69 73
+	   3A 20
+ 00000032  0000000B [		result	BYTE	11 DUP(?),cr,lf,0		; space for result & EOF
+	    00
+	   ] 0D 0A 00
+
+ 00000000			.CODE
+ 00000000			_start:
+					output	prompt1				; prompt for 1st number
+					input	value, 16			; get a value for x
+					atoi	value				; covt to int
+ 00000030  66| 8B D8			mov	bx, ax				; copy to scratch reg
+ 00000033  66| F7 E3			mul	bx				; square its self
+ 00000036  66| F7 E3			mul	bx				; cube its self
+ 00000039  66| 6B C0 05			imul	ax, 5				; multiply by 5
+
+ 0000003D  66| 8B CB			mov	cx, bx				; make a copy of x in cx
+ 00000040  66| 03 C9			add	cx, cx				; square its self
+ 00000043  66| 6B C9 07			imul	cx, 7				; multipy by 7
+ 00000047  66| 2B C1			sub	ax, cx				; sub (5x^3) - (7x^2)
+
+ 0000004A  66| 6B DB 03			imul	bx, 3				; multiply x by 3
+ 0000004E  66| 03 C3			add	ax, bx				; add to previous sum
+
+ 00000051  66| 83 E8 0A			sub	ax, 10				; subtract 10 from sum
+					itoa	result, ax			; convert from dec to ASCII
+					output	answer				; display answer
+
+					INVOKE	ExitProcess,0
+ 0000007D			PUBLIC _start
+				END
+Microsoft (R) Macro Assembler Version 6.11		    02/24/09 10:50:38
+file.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atoi . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+itoa . . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000040 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000007D DWord	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$$$$00001  . . . . . . . . . .	P Near	 00000001 _TEXT	Length= 0000007C Private
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_start . . . . . . . . . . . . .	L Near	 00000000 _TEXT	Public
+answer . . . . . . . . . . . . .	Byte	 00000021 _DATA	
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atoiproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+cr . . . . . . . . . . . . . . .	Number	 0000000Dh   
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+inproc . . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+itoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+lf . . . . . . . . . . . . . . .	Number	 0000000Ah   
+outproc  . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+prompt1  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+result . . . . . . . . . . . . .	Byte	 00000032 _DATA	
+value  . . . . . . . . . . . . .	Byte	 00000011 _DATA	
+
+	   0 Warnings
+	   0 Errors

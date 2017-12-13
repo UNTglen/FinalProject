@@ -1,0 +1,63 @@
+; Filename:     1000count.asm
+; Author:       Glen Newell
+; Course:       CSI 2334
+; Assignment:	6.2
+; Date:		3-2-09
+; Helpers:      
+;
+; User will input ten 16-bit values, one at a time untill the sum of the
+; values are greater than 1000 or 10 values have been entered. The program
+; will display the results to the screen..
+
+
+.386
+.MODEL FLAT
+
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+
+include io.h           			; header for input/output
+
+cr    equ       0dh           	  	; carriage return char
+lf    equ       0ah             	; line feed
+MAX   equ       10              	; max number of input values
+
+.STACK  4096				; 4096 bytes saved for stack
+
+.DATA  					; begin data segment
+desc    BYTE    cr,Lf,"You will enter ten 16-bit values, one at a time.",cr,lf
+        BYTE    "untill the sum of the values is greater than 1000 or ",cr,lf
+        BYTE    "10 values have been entered. The program will display ",cr,lf
+	BYTE	"results to the screen.",cr,lf,lf,0
+prompt  BYTE    "Enter a 16-bit value: ",0
+myArray	WORD	MAX DUP (?)
+value   BYTE    16 DUP (?)
+label1  BYTE    cr,lf,lf,"The sum of input values is: "
+count   BYTE    6 DUP (?),cr,lf,0
+
+
+.CODE					; reserve storage for code
+_start: sub	dx,dx			; init count>100 to 0
+	mov	cx,MAX			; init counter to MAX
+	lea	ebx,myArray		; load address of myArray
+	output	desc			; output pgm desc to screen
+
+PROCESS:output	prompt			; prompt user to input value
+	input	value,16		; read user input
+	atoi	value			; convert ASCII to integer (ax)
+	add	dx,ax			; add sum of values
+	mov	WORD PTR[ebx],ax	; load value in MyArray
+	cmp	dx,1000			; compare to 1000
+	jge	DONE			; if <= 1000 goto NEXT
+
+NEXT:	add	ebx,2			; move to next array element
+	dec	cx			; decrement count down counter
+	jnz	PROCESS			; if counter doesnt = 0 continue
+
+DONE:	itoa	count,dx		; convert num to ASCII and store
+	output	label1			; output results
+		
+	INVOKE 	ExitProcess, 0  	; exit with return code 0
+	
+PUBLIC _start                   	; make entry point public
+END                             	; end of source code
+e

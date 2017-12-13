@@ -1,0 +1,54 @@
+; Filename:	file.asm
+; Author:	Glen Newell
+; Course:	CSI 2334
+; Assignment:	6a
+; Helpers:	None
+;
+; This program will help solve the equation p(x)=5x^3-7x^2+3x-10
+;
+
+.386
+.MODEL FLAT
+
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+
+INCLUDE io.h					; Include header file
+
+cr	EQU	0dh				; carriage return
+lf	EQU	0ah				; line feed
+
+.STACK 4096
+
+.DATA
+prompt1	BYTE	"Enter a number: ",0		; prompts for 1st number
+value	BYTE	16 DUP(?)			; Allocate Temp storage
+answer	BYTE	cr,lf,"The answer is: " 	; promopt for output
+result	BYTE	11 DUP(?),cr,lf,0		; space for result & EOF
+
+.CODE
+_start:
+
+	output	prompt1				; prompt for 1st number
+	input	value, 16			; get a value for x
+	atoi	value				; covt to int
+	mov	bx, ax				; copy to scratch reg
+	mul	bx				; square its self
+	mul	bx				; cube its self
+	imul	ax, 5				; multiply by 5
+
+	mov	cx, bx				; make a copy of x in cx
+	add	cx, cx				; square its self
+	imul	cx, 7				; multipy by 7
+	sub	ax, cx				; sub (5x^3) - (7x^2)
+
+	imul	bx, 3				; multiply x by 3
+	add	ax, bx				; add to previous sum
+
+	sub	ax, 10				; subtract 10 from sum
+	itoa	result, ax			; convert from dec to ASCII
+	output	answer				; display answer
+
+	INVOKE	ExitProcess,0
+
+PUBLIC _start
+END

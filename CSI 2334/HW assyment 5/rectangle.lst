@@ -1,0 +1,147 @@
+Microsoft (R) Macro Assembler Version 6.11		    02/19/09 10:47:14
+rectangle.asm						     Page 1 - 1
+
+
+				; Filename:     rectangle.asm
+				; Author:       Glen Newell
+				; Course:	CSI 2334
+				; Assignment:	Assignment 5A         
+				; Helpers:      None
+				;
+				; This program 
+				; 
+				;
+
+				.386
+				.MODEL FLAT
+
+				ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+
+				INCLUDE io.h					    		; header file for input/output
+			      C ; IO.H -- header file for I/O macros
+			      C ; 32-bit version for flat memory model
+			      C ; R. Detmer   last revised 8/2000
+			      C .NOLIST     ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+					
+ = 0000000D			cr      EQU     0dh						; carriage return character
+ = 0000000A			Lf      EQU     0ah						; line feed
+
+				.STACK 4096							; reserve 4096-byte stack
+
+ 00000000			.DATA
+ 00000000 45 6E 74 65 72	prompt1 BYTE	"Enter inside length:  ",0			; prompts for user input
+	   20 69 6E 73 69
+	   64 65 20 6C 65
+	   6E 67 74 68 3A
+	   20 20 00
+ 00000017 45 6E 74 65 72	prompt2 BYTE	"Enter inside width:  ",0			; prompts for user input
+	   20 69 6E 73 69
+	   64 65 20 77 69
+	   64 74 68 3A 20
+	   20 00
+ 0000002D  00000028 [		dimens	BYTE	40 DUP(?)			  		; allocates space for 32 bit input
+	    00
+	   ]
+ 00000055 0D 0A 54 68 65	results	BYTE	cr,lf, "The total area, inluding borde, is" 	; displays areas size
+	   20 74 6F 74 61
+	   6C 20 61 72 65
+	   61 2C 20 69 6E
+	   6C 75 64 69 6E
+	   67 20 62 6F 72
+	   64 65 2C 20 69
+	   73
+ 00000079  0000000B [		answer	BYTE	11 DUP(?)
+	    00
+	   ]
+ 00000084  0D 0A 00		        BYTE	cr,Lf,0
+
+ 00000000			.CODE
+ 00000000			_start:
+					output	prompt1						; prompts for length
+					input	dimens, 40					; set input
+					atod	dimens						; convert input from ASCII to dec
+ 0000002E  8B D8			mov	ebx, eax					; move to scratch reg
+
+					output	prompt2						; prompts for width
+					input	dimens, 40					; sets input
+					atod	dimens						; converts input from ASCII to dec
+
+ 0000005E  03 C3			add	eax, ebx					; add width
+ 00000060  03 C0			add	eax, eax					; doubles answer
+					dtoa	answer, ebx					; converts to usable ASCII
+					output	results						; displays result
+
+					INVOKE EXITPROCESS, 0					; ending program
+
+ 00000088			PUBLIC _start							; end source code
+
+				END								; end program
+				                               
+Microsoft (R) Macro Assembler Version 6.11		    02/19/09 10:47:14
+rectangle.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atoi . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+itoa . . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000087 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000088 DWord	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+$$$$$$00001  . . . . . . . . . .	P Near	 00000001 _TEXT	Length= 00000087 Private
+ExitProcess  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+Lf . . . . . . . . . . . . . . .	Number	 0000000Ah   
+_start . . . . . . . . . . . . .	L Near	 00000000 _TEXT	Public
+answer . . . . . . . . . . . . .	Byte	 00000079 _DATA	
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atoiproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+cr . . . . . . . . . . . . . . .	Number	 0000000Dh   
+dimens . . . . . . . . . . . . .	Byte	 0000002D _DATA	
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+inproc . . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+itoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+outproc  . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+prompt1  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+prompt2  . . . . . . . . . . . .	Byte	 00000017 _DATA	
+results  . . . . . . . . . . . .	Byte	 00000055 _DATA	
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,56 @@
+; Fileneame:	Program4_2.asm
+; Author:	Glen Newell
+; Course:	CSI 2334.01
+; Helpers:	None
+; Date:		Feb 10, 2009
+;
+; Description: This program will prompt the user for 3 input values, add them
+; together, and display the result.
+
+.386
+.MODEL FLAT
+
+ExitProcess PROTO NEAR32 stdcall, dwExitCode: DWORD	; defines exit process
+
+INCLUDE io.h						; Header file for I/O
+
+cr	EQU	0dh					; set up carage retun
+lf	EQU	0ah					; set up line feed
+
+.STACK 4096						; reserve 4096-byte Stack
+
+.DATA							; Reserve storage for data
+prompt1	BYTE	"Enter first number:", 			; prompts for first number
+prompt2	BYTE	"Enter second number", 0		; prompts for second number
+prompt3	BYTE	"Enter third number", 0			; prompts for third number
+string	BYTE	40 DUP(?)				; allocates mem for string
+label1	BYTE	cr, lf, "The sum is"			; label for sum
+sum	BYTE	11 DUP(?)				; allocates mem for sum
+	BYTE	cr, lf, 0				; cr & lf with null term.
+
+.CODE
+_start:
+	output	prompt1					; displays prompt one
+	input	string, 40				; asks for user input
+	atod	string					; converts string to dec
+	move	ebx, eax				; moves eax to ebx
+
+	output	prompt2					; displays prompt2
+	input	string, 40				; asks for user input
+	atod	string					; converts string to dec
+	add 	eax, ebx				; adds ebx to eax
+	mov	ebx, eax				; moves eax to ebx
+
+	output	prompt3					; displays prompt3
+	input	string, 40				; asks for user input
+	atod	string					; convertes string to dec
+
+	add	eax, ebx				; adds ebx and eax together
+	dtoa	sum, eax				; converts string to dec
+	output	label1					; displays sum and answer
+
+	INVOKE ExitProcess, 0				; exits program
+
+PUBLIC	_start						; makes program public
+
+END							; ends program
