@@ -1,0 +1,31 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: My String Class - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Glen\LOCALS~1\Temp\RSPA1F.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/My String Class.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\DOCUMENTS AND SETTINGS\GLEN\DESKTOP\CSI\CSI II\My String Class\MyString.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Glen\LOCALS~1\Temp\RSPA1F.tmp" 
+<h3>Output Window</h3>
+Compiling...
+MyString.cpp
+C:\DOCUMENTS AND SETTINGS\GLEN\DESKTOP\CSI\CSI II\My String Class\MyString.cpp(48) : error C2440: 'initializing' : cannot convert from 'const class MyString' to 'char *'
+        No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\DOCUMENTS AND SETTINGS\GLEN\DESKTOP\CSI\CSI II\My String Class\MyString.cpp(50) : error C2451: conditional expression of type 'const class MyString' is illegal
+        No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\DOCUMENTS AND SETTINGS\GLEN\DESKTOP\CSI\CSI II\My String Class\MyString.cpp(52) : error C2676: binary '++' : 'const class MyString' does not define this operator or a conversion to a type acceptable to the predefined operator
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+MyString.obj - 3 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

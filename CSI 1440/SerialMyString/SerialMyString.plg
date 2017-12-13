@@ -1,0 +1,28 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: SerialMyString - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Glen\LOCALS~1\Temp\RSP1232.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/SerialMyString.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\Glen\Desktop\csi\SerialMyString\MyString.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Glen\LOCALS~1\Temp\RSP1232.tmp" 
+<h3>Output Window</h3>
+Compiling...
+MyString.cpp
+c:\documents and settings\glen\desktop\csi\serialmystring\mystring.cpp(320) : error C2248: 'data' : cannot access private member declared in class 'MyString'
+        c:\documents and settings\glen\desktop\csi\serialmystring\mystring.h(17) : see declaration of 'data'
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+MyString.obj - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
