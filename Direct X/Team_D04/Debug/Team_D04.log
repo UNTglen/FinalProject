@@ -1,0 +1,23 @@
+﻿Build started 12/13/2017 3:59:41 PM.
+     1>Project "C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Team_D04.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\Team_D04.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt TeamD_P04.cpp
+         TeamD_P04.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /l"0x0409" /nologo /fo"Debug\resource.res" resource.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Debug\Team_D04.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Team_D04.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Debug\Team_D04.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Debug\Team_D04.lib" /MACHINE:X86 Debug\resource.res
+         Debug\TeamD_P04.obj
+         Team_D04.vcxproj -> C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Debug\Team_D04.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Debug\Team_D04.exe;#1" /manifest Debug\Team_D04.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Debug\Team_D04.unsuccessfulbuild".
+         Touching "Debug\Team_D04.lastbuildstate".
+     1>Done Building Project "C:\Users\glenr\Documents\GitHub\FinalProject\Direct X\Team_D04\Team_D04.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.69

@@ -1,0 +1,10 @@
+﻿<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="simpleHello.lua" />
+
+	<Frame name="simpleHelloFrame" hidden="false">
+		<Scripts>
+			<OnLoad>simpleHello.OnLoad(self);</OnLoad>
+			<OnEvent>simpleHello.OnEvent(self, event, ...);</OnEvent>
+		</Scripts>
+	</Frame>
+</UI>
